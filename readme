@@ -1,0 +1,13 @@
+This is a lightweight application protocol which enables multiple users to access and modify files stored in a central repository at a server. A client can create a file and upload it using FTP as the underlying protocol. Server stores these files indexed by their name, and additional metadata like time of file creation, time of file modification. This information is necessary to ensure consistency between copies of files residing with each client. Moreover, if a client has accessed a certain file it will be notified about modifications to that file, if any, when he next logs on to the server. 
+
+After establishing connection, server prompts the client to enter user name and password for authentication. Successful authentication follows server sending list of files modified since client's last login, and prompting user to choose between downloading a file (1) or uploading a file (2). 
+On choosing option (1), server asks for a file name to download, which if exists is sent to client over ftp and access time of file is updated. Also an entry for this file is made into user's list of file if not already present. An error is sent if file doesn't exist.
+On choosing option (2), client transfers the file to server over ftp, and server creates a new entry corresponding to the file if it doesn't exist. If file exists modification time is updated.
+
+To run:
+	gcc client.c 
+	gcc server.c
+	
+	./server
+	./client
+# MuSE-P
